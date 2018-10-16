@@ -1,0 +1,100 @@
+﻿************************
+
+项目注意:
+1.安装node-sass sass-loader 进行sass开发
+
+2.配置反向代理
+     proxyTable: {
+          '/v4': {
+              target: 'https://m.maizuo.com',
+              host: 'm.maizuo.com',
+              changeOrigin:true,
+              // pathRewrite: {
+              //     '^/v4/api': '/v4/api'
+              //   }
+          }
+    }
+
+3. 
+
+fetch -w3c  modern ajax method (XHR -> 替代)
+
+    why:
+    XMLHttpRequest 是一个设计粗糙的 API，配置和调用方式非常混乱，
+    而且基于事件的异步模型写起来不友好。
+
+
+    兼容性不好
+    polyfill:
+    https://github.com/camsong/fetch-ie8
+
+    //get
+        fetch("**").then(res=>res.json()).then(res=>{console.log(res)})
+        fetch("**").then(res=>res.text()).then(res=>{console.log(res)})
+    //post
+
+        fetch("**",{
+              method:'post',
+              headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                       },
+              body: "name=kerwin&age=100"
+        }).then(res=>res.json()).then(res=>{console.log(res)});
+
+
+        // $.ajax({
+        //   url:"",
+        //   type:"post",
+        //   data:{
+        //     name:"kerwin",
+        //     age:100
+        //   }
+        // })
+
+        fetch("/users",{
+            
+              method:'post',
+              headers: {
+                        "Content-Type": "application/json"
+                       },
+              body: JSON.stringify({
+                name:"kerwin",
+                age:100
+              })
+        }).then(res=>res.json()).then(res=>{console.log(res)});
+
+
+        注意：
+        Fetch 请求默认是不带 cookie 的，需要设置 fetch(url, {credentials: 'include'})
+
+4. axios -- 基于promise 封装的库
+
+   vue-resource 2.0 官方不维护了，推荐axios 。
+     
+   //请求方式  put  delete ,get ,post ,header , connect ,trace,option
+   
+   axios.get("") promise对象 
+   axios.post("") promise对象 
+   axios.put("")
+   axios.delete("")
+
+
+   // /article/delete
+
+   // $.ajax({
+   //  url:"/artilce/detelte/2342",
+   //  type:"delete"
+   // })
+
+
+   返回的数据会被包装
+
+    {
+      *:*
+      data:真实后端数据
+    }
+
+   // $.ajax({
+   //  type:'put'
+   // }) 
+************************
